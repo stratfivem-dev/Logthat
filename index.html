@@ -9,52 +9,61 @@
 <link rel="apple-touch-icon" href="icon-192.png">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2.45.4/dist/umd/supabase.min.js"></script>
 <style>
-:root{--bg:#f2f4f3;--card:#fff;--ink:#14201f;--mut:#5f6f6d;--line:#d9e0de;--acc:#0f766e;color-scheme:light}
-@media(prefers-color-scheme:dark){:root{--bg:#0f1514;--card:#182120;--ink:#e8f0ee;--mut:#93a5a2;--line:#2a3836;--acc:#2dd4bf;color-scheme:dark}}
-*{box-sizing:border-box}
-html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.4 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
-body{padding:calc(56px + env(safe-area-inset-top)) 0 calc(70px + env(safe-area-inset-bottom))}
-main{max-width:560px;margin:0 auto;padding:14px}
-h1{font-size:20px;margin:0}
-.top{display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:12px}
-.card{background:var(--card);border:1px solid var(--line);border-radius:12px;padding:14px;margin-bottom:12px}
-input{width:100%;font:inherit;color:var(--ink);background:var(--bg);border:1px solid var(--line);border-radius:10px;padding:12px;margin:0 0 8px}
-button,a.btn{font:inherit;font-weight:600;border:0;border-radius:10px;padding:12px 14px;background:var(--acc);color:#fff;cursor:pointer}
-@media(prefers-color-scheme:dark){button{color:#06201d}}
-button.g,a.btn{background:transparent;color:var(--acc);border:1px solid var(--line);text-decoration:none}
-button.s{padding:6px 10px;font-size:13px}
+:root{--bg:#f3f5f4;--card:#fff;--ink:#101a19;--mut:#667775;--line:#e2e8e6;--acc:#0f766e;--accbg:#e3f2f0;--on:#fff;--sh:0 1px 2px rgba(16,26,25,.06),0 4px 14px rgba(16,26,25,.05);color-scheme:light}
+@media(prefers-color-scheme:dark){:root{--bg:#0d1312;--card:#161e1d;--ink:#e9f1ef;--mut:#92a5a2;--line:#263433;--acc:#2dd4bf;--accbg:#173432;--on:#052724;--sh:none;color-scheme:dark}}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.45 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+body{padding:calc(12px + env(safe-area-inset-top)) 0 calc(92px + env(safe-area-inset-bottom))}
+main{max-width:560px;margin:0 auto;padding:0 14px}
+h1{font-size:22px;font-weight:700;letter-spacing:-.01em;margin:0}
+.top{display:flex;align-items:center;gap:10px;margin:4px 0 14px}
+.top h1{flex:1}
+.card{background:var(--card);border-radius:16px;padding:16px;margin-bottom:14px;box-shadow:var(--sh)}
+.card>b:first-child,.card>.row.sp:first-child>b{font-size:12.5px;font-weight:700;letter-spacing:.07em;text-transform:uppercase;color:var(--mut)}
+input{width:100%;height:48px;font:inherit;color:var(--ink);background:var(--bg);border:1px solid transparent;border-radius:12px;padding:0 14px;margin:0 0 8px;outline:none}
+input:focus{border-color:var(--acc);background:var(--card)}
+input[type=checkbox]{width:auto;height:auto}
+button,a.btn{font:inherit;font-weight:600;border:0;border-radius:12px;padding:0 16px;min-height:48px;background:var(--acc);color:var(--on);cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:6px;text-decoration:none;white-space:nowrap}
+button.g,a.btn{background:var(--accbg);color:var(--acc)}
+button.s{min-height:34px;padding:0 12px;font-size:14px;border-radius:999px}
+button:active{transform:scale(.98)}
 button:disabled{opacity:.5}
 .row{display:flex;gap:8px;align-items:center}
 .sp{justify-content:space-between}
 .mut{color:var(--mut);font-size:14px}
-.stop{border-top:1px solid var(--line);padding:10px 0}
-.stop:first-child{border-top:0}
-.stop.done{opacity:.55}
+.stop{border-top:1px solid var(--line);padding:14px 0}
+.stop:first-child{border-top:0;padding-top:4px}
+.stop.done{opacity:.5}
 .stop.done b{text-decoration:line-through}
-.nav{position:fixed;left:0;right:0;top:0;z-index:5;display:flex;background:var(--card);border-bottom:1px solid var(--line);padding-top:env(safe-area-inset-top)}
-.nav button{flex:1;border-radius:0;background:transparent;color:var(--mut);padding:14px 0}
-.nav button.on{color:var(--acc);box-shadow:inset 0 -3px 0 var(--acc)}
-#map{height:62vh;min-height:320px;border-radius:12px;border:1px solid var(--line)}
-.toast{position:fixed;left:12px;right:12px;top:calc(64px + env(safe-area-inset-top));background:var(--ink);color:var(--bg);padding:10px 14px;border-radius:10px;display:none;text-align:center;z-index:30}
+.stop>.row:not(.sp){margin-top:10px}
+.sps,#ppsis{display:grid;grid-template-columns:repeat(auto-fit,minmax(104px,1fr));gap:8px;margin-top:8px}
+.sps input,#ppsis input{margin:0}
+.sp-note{margin:8px 0 0!important}
+.nav{position:fixed;left:0;right:0;bottom:0;z-index:5;display:flex;gap:4px;background:var(--card);box-shadow:0 -1px 0 var(--line);padding:6px 8px calc(6px + env(safe-area-inset-bottom))}
+.nav button{flex:1;flex-direction:column;gap:2px;min-height:54px;padding:6px 0;background:transparent;color:var(--mut);font-size:11.5px;border-radius:12px}
+.nav button svg{width:24px;height:24px;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round}
+.nav button.on{color:var(--acc);background:var(--accbg)}
+#map{height:62vh;min-height:320px;border-radius:16px}
+.toast{position:fixed;left:14px;right:14px;bottom:calc(88px + env(safe-area-inset-bottom));background:var(--ink);color:var(--bg);padding:12px 16px;border-radius:12px;display:none;text-align:center;z-index:30;font-size:15px;box-shadow:0 6px 24px rgba(0,0,0,.25)}
 .hide{display:none!important}
-.del{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:5px 0}
-dialog{border:1px solid var(--line);border-radius:14px;background:var(--card);color:var(--ink);width:min(92vw,480px);padding:16px}
+.del{display:flex;justify-content:space-between;align-items:center;gap:8px;padding:8px 0}
+dialog{border:0;border-radius:18px;background:var(--card);color:var(--ink);width:min(92vw,480px);padding:18px;box-shadow:0 10px 40px rgba(0,0,0,.3)}
 dialog::backdrop{background:#0009}
 gmp-place-autocomplete{width:100%;margin-bottom:8px;color-scheme:light}
-.iw{color:#14201f;font:14px/1.4 system-ui,sans-serif}
+.iw{color:#101a19;font:14px/1.4 system-ui,sans-serif}
 </style>
 </head>
 <body>
 <main>
   <div id="login" class="hide card">
-    <h1 style="margin-bottom:10px">📦 Delivery Log</h1>
+    <h1 style="margin-bottom:14px">Delivery Log</h1>
     <input id="em" type="email" placeholder="Email" autocomplete="username">
     <input id="pw" type="password" placeholder="Password" autocomplete="current-password">
     <button id="loginBtn" style="width:100%">Sign in</button>
   </div>
 
   <div id="app" class="hide">
-    <div class="top"><h1>📦 Delivery Log</h1><span class="mut" id="pend"></span><button class="g s" id="logout">Sign out</button></div>
+    <div class="top"><h1>Delivery Log</h1><span class="mut" id="pend"></span><button class="g s" id="logout">Sign out</button></div>
 
     <div id="keybox" class="card hide">
       <b>Add your Google Maps key</b>
@@ -115,13 +124,14 @@ gmp-place-autocomplete{width:100%;margin-bottom:8px;color-scheme:light}
   </div>
 </main>
 
-<div class="nav hide" id="nav">
-  <button data-t="run" class="on">To deliver</button><button data-t="ret">Returns</button><button data-t="map">Map</button><button data-t="log">Log</button>
-</div>
+<div class="nav hide" id="nav"><button data-t="run" class="on"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 7l9-4 9 4v10l-9 4-9-4V7z"/><path d="M3 7l9 4 9-4M12 11v10"/></svg><span>To deliver</span></button><button data-t="ret"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 14 4 9l5-5"/><path d="M4 9h10.5a5.5 5.5 0 0 1 0 11H11"/></svg><span>Returns</span></button><button data-t="map"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 21s7-5.2 7-11a7 7 0 1 0-14 0c0 5.8 7 11 7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><span>Map</span></button><button data-t="log"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h13M8 12h13M8 18h13M3 6h.01M3 12h.01M3 18h.01"/></svg><span>Log</span></button></div>
 <dialog id="dlg"><div id="dlgbody"></div></dialog>
 <div class="toast" id="toast"></div>
 
 <script>
+// Put your Google key between the quotes to build it into the site (then nobody has to paste it on their phone).
+const GOOGLE_KEY='';
+const gKey=()=>GOOGLE_KEY||localStorage.getItem('gmkey');
 const sb=supabase.createClient('https://yznhzcqqtufxkdkxxqmv.supabase.co','sb_publishable__PLrzW0x4Gqd8fq1gFwPIw_fgK-CWbY');
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"]/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]));
@@ -358,7 +368,7 @@ $('mail').onclick=async()=>{
 
 /* ---------- Google Maps + scanning ---------- */
 function setupMaps(){
-  const key=localStorage.getItem('gmkey');
+  const key=gKey();
   if(!key){$('keybox').classList.remove('hide');return}
   window.gm_authFailure=()=>toast('Google rejected the Maps key. Check it and the enabled APIs.');
   new Promise((res,rej)=>{window.__gm=res;const s=document.createElement('script');s.src='https://maps.googleapis.com/maps/api/js?key='+encodeURIComponent(key)+'&loading=async&region=NZ&language=en-NZ&callback=__gm';s.onerror=rej;document.head.appendChild(s)})
@@ -384,7 +394,7 @@ async function onPick(e){
 }
 function fillFields(c,cls,id,list){c.innerHTML='';list.forEach(v=>{const i=addField(c,cls,v);if(id)i.dataset.id=id})}
 function scan(c,cls,id,btn){
-  const key=localStorage.getItem('gmkey');if(!key)return toast('Add your Google key first.');
+  const key=gKey();if(!key)return toast('Add your Google key first.');
   const inp=document.createElement('input');inp.type='file';inp.accept='image/*';inp.setAttribute('capture','environment');inp.style.display='none';document.body.appendChild(inp);
   inp.onchange=async()=>{
     const f=inp.files[0];inp.remove();if(!f)return;
