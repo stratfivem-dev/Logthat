@@ -1,0 +1,9 @@
+{
+  "name": "logthat",
+  "version": "1.0.0",
+  "main": "server.js",
+  "scripts": {
+    "build": "echo build",
+    "start": "node server.js"
+  }
+}
