@@ -6,6 +6,7 @@ const path = require('path');
 const FILES = {
   'index.html': 'text/html; charset=utf-8',
   'sw.js': 'text/javascript; charset=utf-8',
+  'style.css': 'text/css; charset=utf-8',
   'manifest.json': 'application/manifest+json',
   'icon-192.png': 'image/png',
   'icon-512.png': 'image/png',
