@@ -42,6 +42,6 @@ dialog::backdrop{background:#0009}
 gmp-place-autocomplete{width:100%;margin-bottom:8px;color-scheme:light dark}
 .iw{color:#101a19;font:14px/1.4 system-ui,sans-serif}
 .stopcard{padding:22px 18px}
-.stopcard #searchbox{margin:14px 0 14px}
+.stopcard #searchbox{border-radius:12px; margin:14px 0 14px}
 .stopcard #mechrow{margin:0 0 16px}
 .stopcard #ppsis{margin:0 0 16px}
